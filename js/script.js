@@ -16,6 +16,7 @@ const handleLoadNews = async(categoryId) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/news/category/${categoryId}`);
     const data = await response.json();
     const cardContainer = document.getElementById('card-container');
+    cardContainer.innerHTML = "";
     data.data.forEach((news) => {
         console.log();
         const div = document.createElement('div');
@@ -24,6 +25,7 @@ const handleLoadNews = async(categoryId) => {
                 <div class="card-body">
                     <h2 class="card-title">${news.title.slice(0, 40)}</h2>
                     <p>${news.details.slice(0, 170)}</p>
+                    <p>Total View: ${news.total_view?news.total_view: "No Views"}</p>
                     <div class="card-actions justify-end">
                         <button class="btn btn-primary">${news?.rating?.badge}</button>
                     </div>
@@ -42,3 +44,4 @@ const handleLoadNews = async(categoryId) => {
 }
 
 handleCategory();
+handleLoadNews("01");
